@@ -1,0 +1,9 @@
+body {
+    background: #444;
+}
+.empty-board {
+    background-image: url("../img/empty-board.jpg");
+    width: 622px;
+    height: 622px;
+    margin: 100px auto;
+}

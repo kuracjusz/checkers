@@ -38,7 +38,7 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
         with:
-          path: dist
+          folder: dist
 
     environment:
       name: github-pages

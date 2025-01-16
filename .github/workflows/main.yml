@@ -36,14 +36,14 @@ jobs:
 
       - name: Deploy to Github Pages
         id: deployment
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: dist
+        uses: actions/deploy-pages@v4
 
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        artifact: dist
 
 concurrency:
   group: "pages"

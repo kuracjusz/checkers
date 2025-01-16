@@ -21,13 +21,13 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        run: pnpm install
+        run: npm install
 
       - name: Run build
-        run: pnpm build
+        run: npm build
 
       - name: Run tests
-        run: pnpm test
+        run: npm test
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

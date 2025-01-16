@@ -37,6 +37,10 @@ jobs:
       - name: Deploy to Github Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          artifact-path: dist
+          target-folder: dist
+          keep_files: false
 
     environment:
       name: github-pages

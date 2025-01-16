@@ -37,12 +37,12 @@ jobs:
       - name: Deploy to Github Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          path: dist
 
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-      with:
-        folder: "dist"
 
 concurrency:
   group: "pages"

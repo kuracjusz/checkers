@@ -10,7 +10,7 @@ export type Field =
     } & BasicProperties &
       (
         | {
-            pawn?: never;
+            pawn?: null;
           }
         | {
             pawn: Pawn;

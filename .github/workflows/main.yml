@@ -42,7 +42,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
       with:
-        folder: dist
+        folder: "dist"
 
 concurrency:
   group: "pages"

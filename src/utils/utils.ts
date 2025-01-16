@@ -111,7 +111,7 @@ export function createPawn(player: 1 | 2 = 1, fieldId: number): Pawn {
 
 function move(this: Pawn, player: Player, id: number, fields: Field[]) {
   console.log(id);
-  const fieldIdWithPawnToDestroy = checkIfDestroy(id, this);
+  const fieldIdWithPawnToDestroy = checkIfDestroy(this);
   fields[this.fieldId].pawn = null;
   this.fieldId = id;
   fields[id].pawn = this;
@@ -131,7 +131,7 @@ function move(this: Pawn, player: Player, id: number, fields: Field[]) {
   } satisfies { playerAfterMove: Player };
 }
 
-function checkIfDestroy(fieldId: number, pawn: Pawn) {
+function checkIfDestroy(pawn: Pawn) {
   return pawn?.possibleMoves.find((move) => {
     if (move.fieldIdWithPawnToDestroy) {
       return move.fieldIdWithPawnToDestroy;

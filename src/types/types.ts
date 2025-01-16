@@ -6,19 +6,14 @@ export type BasicProperties = {
 export type Field =
   | {
       enabled: boolean;
+      framed?: boolean;
     } & BasicProperties &
       (
         | {
-            pawn?: null;
-            framed?: false;
-          }
-        | {
-            pawn?: null;
-            framed: true;
+            pawn?: never;
           }
         | {
             pawn: Pawn;
-            framed?: false;
           }
       );
 

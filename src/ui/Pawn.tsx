@@ -1,12 +1,12 @@
 import clsx from "clsx";
-import { IPawn } from "../types/types";
+import type { Pawn } from "../types/types";
 
 export function Pawn({
   clicked,
   color,
   onClick,
   id,
-}: Pick<IPawn, "id" | "color"> & {
+}: Pick<Pawn, "id" | "color"> & {
   clicked: boolean;
   onClick?: (id: number) => void;
 }) {

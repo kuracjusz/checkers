@@ -69,7 +69,7 @@ export default function Board() {
 
       if (!prevPawn?.move) return fields;
 
-      const { playerAfterMove } = prevPawn.move(player, id, fields);
+      // const { playerAfterMove } = prevPawn.move(player, id, fields);
 
       return [...fields];
     });

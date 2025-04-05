@@ -1,48 +1,42 @@
-import { Dispatch, SetStateAction } from "react";
-import { Field, Player } from "../types/types";
+import { Field, Pawn, Player } from "../types/types";
+import { selectNextMoves } from "../utils/utils";
 
-export function computerMove(setFields: Dispatch<SetStateAction<Field[]>>) {
-  const pawnsThatCouldMove: number[] = [];
-  let hasMoves = false;
+export function wait() {
+  return new Promise((resolve) => {
+    setTimeout(resolve, 1000);
+  });
+}
 
-  setFields((fields) => {
-    if (hasMoves) return fields;
+export function computerMove(changedFields: Field[][]) {
+  const pawnsWitNexthMoves: Pawn[] = [];
 
-    fields.forEach((field) => {
-      if (!field.pawn || field.pawn.player === 2) return;
+  changedFields.forEach((row) => {
+    row.forEach((field) => {
+      if (field.pawn && field.pawn.player === 1) {
+        const { nextPositions } = selectNextMoves(
+          changedFields,
+          field.pawn.position,
+          1,
+          false
+        );
+        // console.log("nextPositions", field.pawn);
 
-      const possibleMoves = field.pawn?.getPawnPossibleMoves(fields, field.id);
-      if (possibleMoves.length > 0) {
-        pawnsThatCouldMove.push(field.id);
-      }
-    });
-
-    hasMoves = true;
-
-    // console.log(pawnsThatCouldMove, fields[pawnsThatCouldMove[0]].pawn);
-
-    if (pawnsThatCouldMove.length === 0) return fields;
-
-    // const pawn = fields[pawnsThatCouldMove[0]].pawn;
-
-    const pawnNextMoves = [7, 9];
-    function move() {
-      for (const fieldIdWithPawn of pawnsThatCouldMove) {
-        for (let i = 0; i < pawnNextMoves.length; i++) {
-          const nextId = fieldIdWithPawn + pawnNextMoves[i];
-
-          if (fields[nextId].enabled && !fields[nextId].pawn) {
-            fields[fieldIdWithPawn].pawn?.move(1, nextId, fields);
-            return;
-          }
+        if (nextPositions.length > 0) {
+          pawnsWitNexthMoves.push(field.pawn);
         }
       }
-    }
-
-    move();
-
-    return [...fields];
+    });
   });
 
-  return { playerNext: 2 } satisfies { playerNext: Player };
+  const randomPawn =
+    pawnsWitNexthMoves[Math.floor(Math.random() * pawnsWitNexthMoves.length)];
+  const randomMove = Math.floor(
+    Math.random() * randomPawn.possibleMoves.length
+  );
+
+  randomPawn.move(changedFields, randomPawn.possibleMoves[randomMove]);
+
+  // console.log(pawnsWitNexthMoves);
+
+  return changedFields;
 }

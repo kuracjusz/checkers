@@ -6,7 +6,7 @@ const COLOR: Record<Player, string> = {
 };
 
 export const GAME_PROPS = {
-  BOARD_FIELDS: 64,
+  BOARD_FIELDS: 8,
   PAWN_LINES: 3,
   PLAYERS: 2,
   COLOR,

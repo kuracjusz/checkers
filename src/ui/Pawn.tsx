@@ -1,21 +1,24 @@
 import clsx from "clsx";
-import type { Pawn } from "../types/types";
+import type { Pawn, Position } from "../types/types";
+import { MouseEvent } from "react";
 
 export function Pawn({
   clicked,
   color,
   onClick,
-  id,
-}: Pick<Pawn, "id" | "color"> & {
+  position,
+  canClick,
+}: Pick<Pawn, "color" | "position"> & {
   clicked: boolean;
-  onClick?: (id: number) => void;
+  onClick?: (e: MouseEvent, position: Position) => void;
+  canClick: boolean;
 }) {
   return (
     <div
-      onClick={() => onClick?.(id)}
+      onClick={(e) => onClick?.(e, position)}
       className={clsx(
         {
-          "cursor-pointer": onClick,
+          "cursor-pointer": canClick,
         },
         clicked ? "bg-pink-500" : color,
         `rounded-full h-full w-full`

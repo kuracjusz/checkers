@@ -1,4 +1,4 @@
-import { Field, Pawn, Player } from "../types/types";
+import { Field, Pawn } from "../types/types";
 import { selectNextMoves } from "../utils/utils";
 
 export function wait() {
@@ -19,9 +19,11 @@ export function computerMove(changedFields: Field[][]) {
           1,
           false
         );
-        // console.log("nextPositions", field.pawn);
 
-        if (nextPositions.length > 0) {
+        if (
+          nextPositions.length > 0 &&
+          !nextPositions.every((position) => position === undefined)
+        ) {
           pawnsWitNexthMoves.push(field.pawn);
         }
       }
@@ -30,13 +32,13 @@ export function computerMove(changedFields: Field[][]) {
 
   const randomPawn =
     pawnsWitNexthMoves[Math.floor(Math.random() * pawnsWitNexthMoves.length)];
-  const randomMove = Math.floor(
-    Math.random() * randomPawn.possibleMoves.length
+  const possibleMoves = randomPawn.possibleMoves.filter(
+    (move) => move !== undefined
   );
+  const randomMove = Math.floor(Math.random() * possibleMoves.length);
 
-  randomPawn.move(changedFields, randomPawn.possibleMoves[randomMove]);
-
-  // console.log(pawnsWitNexthMoves);
+  randomPawn.move(changedFields, possibleMoves[randomMove]);
+  console.log(randomMove, possibleMoves);
 
   return changedFields;
 }

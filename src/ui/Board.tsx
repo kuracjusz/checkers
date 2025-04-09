@@ -1,4 +1,4 @@
-import { MouseEvent, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { GAME_PROPS } from "../config";
 import {
   BasicProperties,
@@ -50,7 +50,6 @@ export default function Board() {
 
     setFields(changedFields);
     // setPlayer((player) => (player === 1 ? 2 : 1));
-    console.log(player);
 
     await wait();
     setFields([...computerMove(changedFields)]);

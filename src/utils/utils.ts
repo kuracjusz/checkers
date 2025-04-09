@@ -179,14 +179,12 @@ export const selectNextMoves = (
   });
 
   const nextPositions = nextMoves.map((move) => {
-    if (!move) return undefined;
+    if (!move) return;
     if (selectFrame) {
       move.framed = true;
     }
     return move.position;
   });
-
-  console.log("nextPositions", { x, y }, nextPositions, nextMoves);
 
   changedFields[y][x].pawn.possibleMoves = nextPositions;
 

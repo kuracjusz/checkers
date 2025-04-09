@@ -117,15 +117,6 @@ export function fieldModificator<Key extends keyof Field>(
   );
 }
 
-function getNextMove(
-  changedFields: Field[][],
-  move: number,
-  sign: 1 | -1,
-  { x, y }: Position
-) {
-  return changedFields[y - move * sign]?.[x + move];
-}
-
 function getPossibleMoves(
   changedFields: Field[][],
   player: Player,

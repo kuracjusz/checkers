@@ -38,7 +38,6 @@ export function computerMove(changedFields: Field[][]) {
   const randomMove = Math.floor(Math.random() * possibleMoves.length);
 
   randomPawn.move(changedFields, possibleMoves[randomMove]);
-  console.log(randomMove, possibleMoves);
 
   return changedFields;
 }

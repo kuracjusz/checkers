@@ -1,11 +1,6 @@
 import { useRef, useState } from "react";
 import { GAME_PROPS } from "../config";
-import {
-  BasicProperties,
-  Pawn as PawnType,
-  Player,
-  Position,
-} from "../types/types";
+import { Pawn as PawnType, Player, Position } from "../types/types";
 import {
   fieldModificator,
   createFields,
@@ -19,13 +14,13 @@ import { computerMove, wait } from "../computer/computer";
 
 export default function Board() {
   // const [color, setColor] = useState(false);
-  const [player, setPlayer] = useState<Player>(2);
+  const [player] = useState<Player>(2);
   const [fields, setFields] = useState(createFields(GAME_PROPS.BOARD_FIELDS));
   const clickedPawn = useRef<PawnType | null>();
 
-  function getPossibleFields<T extends BasicProperties>(this: T) {
-    // console.log(this);
-  }
+  // function getPossibleFields<T extends BasicProperties>(this: T) {
+  // console.log(this);
+  // }
 
   const pawnHandler = ({ x, y }: Position) => {
     const changedFields = [...fields];

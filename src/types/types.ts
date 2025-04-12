@@ -31,3 +31,6 @@ export type Pawn = BasicProperties & {
 export type PositionNumber = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
 
 export type Position = { x: number; y: number };
+
+export type Display = "menu" | "board";
+export type PlayerList = "computer" | "player";

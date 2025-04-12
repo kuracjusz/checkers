@@ -1,6 +1,6 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { GAME_PROPS } from "../config";
-import { Pawn as PawnType, Player, Position } from "../types/types";
+import { Display, Pawn as PawnType, Player, Position } from "../types/types";
 import {
   fieldModificator,
   createFields,
@@ -12,7 +12,11 @@ import { Field } from "../ui/Field";
 import clsx from "clsx";
 import { computerMove, wait } from "../computer/computer";
 
-export default function Board() {
+type BoardProps = {
+  onSelect(display: Display): void;
+};
+
+export default function Board({ onSelect }: BoardProps) {
   // const [color, setColor] = useState(false);
   const [player] = useState<Player>(2);
   const [fields, setFields] = useState(createFields(GAME_PROPS.BOARD_FIELDS));
@@ -50,9 +54,20 @@ export default function Board() {
     setFields([...computerMove(changedFields)]);
   };
 
+  useEffect(() => {
+    const arrowEvent = (e: KeyboardEvent) => {
+      if (e.key === "Backspace") {
+        onSelect("menu");
+      }
+    };
+    document.addEventListener("keydown", arrowEvent);
+
+    return () => document.removeEventListener("keydown", arrowEvent);
+  }, [onSelect]);
+
   return (
     <>
-      <div className="grid-cols-8 grid w-full">
+      <div className="grid-cols-8 grid w-full self-center max-w-5xl m-auto">
         {fields.map((col, y) =>
           col.map((field, x) => {
             return (

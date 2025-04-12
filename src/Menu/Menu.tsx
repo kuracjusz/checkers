@@ -5,7 +5,7 @@ import { useEffect } from "react";
 const MiniBoard = () => {
   return (
     <div className="grid grid-cols-8 w-28 h-28 m-auto">
-      {Array.from({ length: 64 }).map((row, index) => (
+      {Array.from({ length: 64 }).map((_, index) => (
         <div
           key={index}
           className={`${

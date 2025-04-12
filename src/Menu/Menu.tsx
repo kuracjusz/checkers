@@ -33,7 +33,6 @@ export const Menu = ({ onSelect, setSelected, selected }: MenuProps) => {
     const arrowEvent = (e: KeyboardEvent) => {
       let index = playersList.indexOf(selected);
       if (e.key === "ArrowDown") {
-        console.log(playersList.length - 1);
         setSelected(
           playersList[
             index < playersList.length - 1 ? ++index : playersList.length - 1

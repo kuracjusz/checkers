@@ -9,9 +9,17 @@ function App() {
   const [display, setDisplay] = useState<Display>("menu");
   const [selected, setSelected] = useState(playersList[0]);
 
-  if (display === "board") return <Board onSelect={setDisplay} />;
   return (
-    <Menu onSelect={setDisplay} setSelected={setSelected} selected={selected} />
+    <>
+      <Board onSelect={setDisplay} />;
+      {display === "menu" && (
+        <Menu
+          onSelect={setDisplay}
+          setSelected={setSelected}
+          selected={selected}
+        />
+      )}
+    </>
   );
 }
 

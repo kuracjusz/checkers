@@ -136,8 +136,8 @@ function getPossibleMoves(
   //   i += 1;
   // }
 
-  moves.forEach((move) => {
-    const nextMove = changedFields[y + 1 * sign]?.[x + move];
+  for (const move of moves) {
+    let nextMove = changedFields[y + sign]?.[x + move];
 
     const ifCanJump =
       nextMove?.pawn && !changedFields[y + 2 * sign]?.[x + 2 * move]?.pawn;
@@ -145,14 +145,15 @@ function getPossibleMoves(
     const isBlocked = nextMove?.pawn?.player === player;
 
     if (ifCanJump && !isBlocked) {
-      nextMoves.push(changedFields[y + 2 * sign]?.[x + 2 * move]);
-      return { isJumping: true, nextMoves };
+      nextMove = changedFields[y + 2 * sign]?.[x + 2 * move];
+      nextMoves.push(nextMove);
+      return { isJumping: true, nextMoves: [nextMove] };
     }
 
     if (ifNotPawnOnWay) {
       nextMoves.push(nextMove);
     }
-  });
+  }
 
   return { isJumping: false, nextMoves };
 }
@@ -168,6 +169,7 @@ export const selectNextMoves = (
     x,
     y,
   });
+  console.log("jump", isJumping, nextMoves);
 
   const nextPositions = nextMoves.map((move) => {
     if (!move) return;

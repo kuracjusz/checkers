@@ -55,27 +55,33 @@ export const Menu = ({ onSelect, setSelected, selected }: MenuProps) => {
   }, [selectedComputer, onSelect, setSelected, selected]);
 
   return (
-    <div className="flex flex-col m-auto gap-20 px-20 pt-[9rem] border rounded-2xl min-w-[830px] shadow">
-      <MiniBoard />
-      <h1
-        className={clsx(
-          "cursor-pointer",
-          selectedComputer ? "opacity-100" : "opacity-50"
-        )}
-        // onClick={() => onSelect("board")}
-      >
-        {selectedComputer && "🤖"} Play with computer {selectedComputer && "🤖"}
-      </h1>
-      <h1
-        className={clsx(
-          "cursor-not-allowed opacity-10",
-          selectedPlayer ? "opacity-100" : "opacity-50"
-        )}
-        // onClick={() => onSelect("board")}
-      >
-        {selectedPlayer && "🧑‍🤝‍🧑"} Play with other player {selectedPlayer && "🧑‍🤝‍🧑"}
-      </h1>
-      <h2 className="mt-[7rem] p-8">⚙️ Settings</h2>
+    <div className="fixed backdrop-blur-sm w-full h-full flex">
+      <div className="flex flex-col m-auto gap-10 p-10 pt-[6rem] bg-[#1a1a1a] rounded-2xl w-min min-w-[630px] shadow">
+        <MiniBoard />
+        <h1
+          className={clsx(
+            "text-4xl",
+            "cursor-pointer",
+            selectedComputer ? "opacity-100" : "opacity-50"
+          )}
+          onClick={() => onSelect("board")}
+        >
+          {selectedComputer && "🤖"} Play with computer{" "}
+          {selectedComputer && "🤖"}
+        </h1>
+        <h1
+          className={clsx(
+            "text-4xl",
+            "cursor-not-allowed opacity-10",
+            selectedPlayer ? "opacity-100" : "opacity-50"
+          )}
+          // onClick={() => onSelect("board")}
+        >
+          {selectedPlayer && "🧑‍🤝‍🧑"} Play with other player{" "}
+          {selectedPlayer && "🧑‍🤝‍🧑"}
+        </h1>
+        <h2 className="mt-[7rem] p-8">⚙️ Settings</h2>
+      </div>
     </div>
   );
 };
